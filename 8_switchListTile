@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  // Menjalankan aplikasi dengan root widget MyApp
+  runApp(const MyApp());
+}
+
+// Class MyApp adalah StatelessWidget yang merupakan root widget dari aplikasi
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // MaterialApp sebagai root widget untuk Material Design
+    return MaterialApp(
+      // Judul aplikasi
+      title: 'My App',
+      // Halaman awal aplikasi menggunakan class Home
+      home: Home(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.green, // Mengatur warna latar belakang AppBar
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeState extends State<Home> {
+  final List<String> settings = ['Data Seluler', 'Mode Pesawat', 'WiFi'];
+  List<bool> settingValues = [false, false, false];
+
+  @override
+Widget build(BuildContext context) {
+  // Membangun tampilan halaman menggunakan Scaffold sebagai kerangka utama
+  return Scaffold(
+    // Menambahkan AppBar dengan judul "Percobaan Menggunakan Widget"
+    appBar: AppBar(title: const Text('Percobaan Menggunakan Widget')),
+    // Bagian utama dari halaman, diisi dengan ListView yang dapat digulir
+    body: Padding(
+      // Menambahkan jarak sekitar ListView
+      padding: const EdgeInsets.all(8.0),
+      // ListView berisi daftar pengaturan dalam bentuk SwitchListTile
+      child: ListView(
+        children: <Widget>[
+          // SwitchListTile pertama untuk pengaturan pertama
+          SwitchListTile(
+            // Nilai pengaturan diambil dari settingValues[0]
+            value: settingValues[0],
+            // Judul pengaturan
+            title: Text(settings[0]),
+            // Ikona yang terletak di sisi kiri judul
+            secondary: const Icon(Icons.language),
+            // Callback yang dipanggil saat nilai pengaturan berubah
+            onChanged: (bool value) {
+              setState(() {
+                // Mengubah nilai pengaturan sesuai dengan yang dipilih pengguna
+                settingValues[0] = value;
+              });
+              // Mencetak nilai pengaturan ke konsol untuk tujuan debug
+              print(settingValues);
+            },
+          ),
+          // Membuat garis pemisah antara pengaturan pertama dan kedua
+          Divider(),
+          // SwitchListTile kedua untuk pengaturan kedua
+          SwitchListTile(
+            // Nilai pengaturan diambil dari settingValues[1]
+            value: settingValues[1],
+            // Judul pengaturan
+            title: Text(settings[1]),
+            // Ikona yang terletak di sisi kiri judul
+            secondary: const Icon(Icons.airplanemode_active),
+            // Callback yang dipanggil saat nilai pengaturan berubah
+            onChanged: (bool value) {
+              setState(() {
+                // Mengubah nilai pengaturan sesuai dengan yang dipilih pengguna
+                settingValues[1] = value;
+              });
+              // Mencetak nilai pengaturan ke konsol untuk tujuan debug
+              print(settingValues);
+            },
+          ),
+          // Membuat garis pemisah antara pengaturan kedua dan ketiga
+          Divider(),
+          // SwitchListTile ketiga untuk pengaturan ketiga
+          SwitchListTile(
+            // Nilai pengaturan diambil dari settingValues[2]
+            value: settingValues[2],
+            // Judul pengaturan
+            title: Text(settings[2]),
+            // Ikona yang terletak di sisi kiri judul
+            secondary: const Icon(Icons.wifi),
+            // Callback yang dipanggil saat nilai pengaturan berubah
+            onChanged: (bool value) {
+              setState(() {
+                // Mengubah nilai pengaturan sesuai dengan yang dipilih pengguna
+                settingValues[2] = value;
+              });
+              // Mencetak nilai pengaturan ke konsol untuk tujuan debug
+              print(settingValues);
+            },
+          ),
+        ],
+      ),
+    ),
+  );
+ } 
+}
+
+
+// Class Home adalah StatefulWidget yang menampilkan halaman utama aplikasi
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
